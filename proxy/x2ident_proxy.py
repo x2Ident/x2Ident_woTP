@@ -61,6 +61,9 @@ def request(flow):
     except:
         user_agent = "none"
 
+    # write cookie_id to header
+    flow.request.headers["Cookie"] = "xi_test=1; "+flow.request.headers["Cookie"]
+
 	# check if user is on a xident page
     if url_xi_pattern in flow.request.url:
         return flow
@@ -132,6 +135,8 @@ def request(flow):
     db.commit()
     cur.close()
 
+def response(flow):
+    
 # def response(flow):
 #     cur.execute("SELECT pwid, onetime, real_pw, expires, url, pw_global FROM `onetimekeys` WHERE pw_active='1' ")
 #     replaced = False
